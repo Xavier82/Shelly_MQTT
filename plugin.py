@@ -1178,10 +1178,12 @@ class BasePlugin:
                break
              if iUnit==0:
               iUnit=len(Devices)+1
-             if "ShellyBulbDuo" in unitname:
+            if "ShellyBulbDuo" in unitname:
               Domoticz.Device(Name=unitname, Unit=iUnit,Type=241, Subtype=8, Switchtype=7, Used=1,DeviceID=unitname).Create() # create Cold White + Warm White device
-             elif (mqttpath[2] in ["white","light"]) or ("2LED" in unitname):
+             elif (mqttpath[2] in ["white"]) or ("2LED" in unitname):
               Domoticz.Device(Name=unitname, Unit=iUnit,Type=241, Subtype=3, Switchtype=7, Used=1,DeviceID=unitname).Create() # create Color White device
+             elif (mqttpath[2] in ["light"]):
+              Domoticz.Device(Name=unitname, Unit=iUnit,Type=244, Subtype=73, Switchtype=7, Used=1,DeviceID=unitname).Create() # create Light Dimmer device
              else:
               if self.homebridge!="1": # check if homebridge support is needed
                Domoticz.Device(Name=unitname, Unit=iUnit,Type=241, Subtype=6, Switchtype=7, Used=1,DeviceID=unitname).Create() # create RGBZW device
